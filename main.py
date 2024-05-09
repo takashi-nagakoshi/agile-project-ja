@@ -72,7 +72,7 @@ def test_square_root():
         assert num >= 0, "Input of the unit test is not reasonable."
         error_msg = "Unit test failed (in = " + str(num) + ")"
         # 計算の丸め誤差により正確には値が一致しない可能性があるため，両辺ともroundで四捨五入し整数にしてから比較する．
-        assert (round(square_root(num) ** 2) == round(num)) == True, error_msg
+        assert round(square_root(num) ** 2) == round(num), error_msg
         assert square_root(num) >= 0, error_msg
 
     # 負実数の入力に対し，INPUT_ERRORの文言が出力されていることを確認する．
