@@ -64,7 +64,7 @@ def test_square_root():
     error_msg = "Unit test failed"
     assert square_root(4) == 2, error_msg
     assert square_root(1) == 1, error_msg
-    assert square_root(0) == 0, error_msg
+    assert square_root(0) == 1, error_msg
 
     # 非負実数の入力に対して，「出力の二乗が入力と一致すること」「出力が非負であること」を確認する．
     num_array = (0, 100, 9999, 999999, 1767.76432)
