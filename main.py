@@ -4,7 +4,7 @@ DO_UNIT_TEST = True
 INPUT_ERROR             = "<Input Error> "
 DESCRIPTION_ADD         = "Add         : x1 + x2"
 DESCRIPTION_SUBTRACT    = "Subtract    : x1 - x2"
-DESCRIPTION_MULTIPLY    = "Multiply    : x1 - x2"
+DESCRIPTION_MULTIPLY    = "Multiply    : x1 * x2"
 DESCRIPTION_DIVIDE      = "Divide      : x1 / x2"
 DESCRIPTION_EXPONENT    = "Exponent    : x1^x2"
 DESCRIPTION_SQUARE_ROOT = "Square Root : sqrt(x1)"
@@ -12,24 +12,30 @@ DESCRIPTION_LAST_RESULT = "Show the last result value"
 
 # [add]__________________________________________________________________________________________________________
 def add(num1, num2):
-    return
+    return num1 + num2
 
 def test_add():
-    return
+    assert add(5, 3) == 8
+    assert add(-5, 3) == -2
+    assert add(0, 0) == 0
 
 # [subtract]_____________________________________________________________________________________________________
 def subtract(num1, num2):
-    return
+    return num1 - num2
 
 def test_subtract():
-    return
+    assert subtract(5, 3) == 2
+    assert subtract(-5, 3) == -8
+    assert subtract(0, 0) == 0
 
 # [multiply]_____________________________________________________________________________________________________
 def multiply(num1, num2):
-    return
+    return num1 * num2
 
 def test_multiply():
-    return
+    assert multiply(5, 3) == 15
+    assert multiply(-5, 3) == -15
+    assert multiply(0, 0) == 0
 
 # [divide]_______________________________________________________________________________________________________
 def divide(num1, num2):
