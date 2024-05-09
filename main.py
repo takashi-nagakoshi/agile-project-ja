@@ -176,7 +176,6 @@ def convert_to_float(num):
         return False, "None"
 
 # [Unit test関数を集約してcallする]________________________________________________________________________________
-
 def unit_test_aggregation():
     test_add()
     test_subtract()
