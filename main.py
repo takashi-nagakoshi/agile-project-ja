@@ -106,11 +106,11 @@ def main(last_result):
         descriptions = [operation['Description'] for operation in operations]    
         num_inputs = [operation['NumOfInputs'] for operation in operations]
         cdescription = descriptions[cindex]
-        cnum_input = num_inputs[cindex]
+        cnum_index = num_inputs[cindex]
 
         # Mode表示と同時にユーザに数値を入力してもらう．
         print("<" + str(cdescription) + ">")
-        num1, num2 = get_input_num(cnum_input, last_result)
+        num1, num2 = get_input_num(cnum_index, last_result)
 
         # 選択された「Operation」に応じた関数をcallする．
         if cdescription == DESCRIPTION_ADD:
@@ -150,8 +150,7 @@ def request_user_to_specify_num(name_of_value, msg_of_last, last_result):
     while True:
         num = input("Enter " + name_of_value + " value (type '" + msg_of_last + "' to use the last result) \n: ")
         if num == msg_of_last: 
-            return last_result
-            
+            return last_result    
         else:
             convert_success, result = convert_to_float(num)
             if convert_success:
