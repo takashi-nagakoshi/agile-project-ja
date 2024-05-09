@@ -150,7 +150,11 @@ def request_user_to_specify_num(name_of_value, last_result):
     while True:
         num = input("Enter " + name_of_value + " value (type '" + msg_of_last + "' to use the last result) \n: ")
         if num == msg_of_last: 
-            return last_result    
+            convert_success, result = convert_to_float(last_result)
+            if convert_success:
+                return result
+            else:
+                print("Cannot use tha last result. Please input different value.")
         else:
             convert_success, result = convert_to_float(num)
             if convert_success:
