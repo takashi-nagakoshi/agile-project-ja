@@ -187,13 +187,13 @@ def unit_test_aggregation():
     return
 
 # [関数実行]______________________________________________________________________________________________________
+if __name__ == "__main__":
+    if DO_UNIT_TEST:
+        unit_test_aggregation()
 
-if DO_UNIT_TEST:
-    unit_test_aggregation()
-
-last_result = "None"
-while True:
-    # unit_testが書きやすいよう，while文の中の処理は独立関数とする．
-    result = main(last_result) 
-    last_result = result
+    last_result = "None"
+    while True:
+        # unit_testが書きやすいよう，while文の中の処理は独立関数とする．
+        result = main(last_result) 
+        last_result = result
 
