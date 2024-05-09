@@ -138,15 +138,15 @@ def main(last_result):
 def get_input_num(num_of_required_input, last_result):
     num1 = "None" # 0で初期化してもいいが，うっかり初期値のまま計算が継続しないようstrで初期化しておく．
     num2 = "None"
-    msg_of_last = "last"
 
     if num_of_required_input >= 1:
-        num1 = request_user_to_specify_num("x1", msg_of_last, last_result)
+        num1 = request_user_to_specify_num("x1", last_result)
     if num_of_required_input >= 2:
-        num2 = request_user_to_specify_num("x2", msg_of_last, last_result)
+        num2 = request_user_to_specify_num("x2", last_result)
     return num1, num2
 
-def request_user_to_specify_num(name_of_value, msg_of_last, last_result):
+def request_user_to_specify_num(name_of_value, last_result):
+    msg_of_last = "last"
     while True:
         num = input("Enter " + name_of_value + " value (type '" + msg_of_last + "' to use the last result) \n: ")
         if num == msg_of_last: 
