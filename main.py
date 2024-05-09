@@ -1,8 +1,17 @@
 import math
 import inspect
 
-INPUT_ERROR = "<Input Error> "
 DO_UNIT_TEST = True
+
+INPUT_ERROR             = "<Input Error> "
+DESCRIPTION_ADD         = "Add"
+DESCRIPTION_SUBTRACT    = "Subtract"
+DESCRIPTION_MULTIPLY    = "Multiply"
+DESCRIPTION_DIVIDE      = "Divide"
+DESCRIPTION_EXPONENT    = "Exponent"
+DESCRIPTION_SQUARE_ROOT = "Square Root"
+DESCRIPTION_LAST_RESULT = "Show the last result value"
+
 
 def square_root(num):
     if num >= 0:
@@ -42,36 +51,65 @@ def unit_test_aggregation():
 if DO_UNIT_TEST:
     unit_test_aggregation()
 
-print("Select operation:")
-print("1. Add")
-print("2. Subtract")
-print("3. Multiply")
-print("4. Divide")
-print("5. Exponent")
-print("6. Square Root")
+def get_input_num(num_of_required_input):
+    num1 = 0 
+    num2 = 0
+    if num_of_required_input >= 1:
+        num1 = float(input("Enter first number : "))
+        if num_of_required_input >= 2:
+            num2 = float(input("Enter second number  : "))
+    return num1, num2
 
-while True:
-    choice = input("Enter choice (1/2/3/4/5/6): ")
+def main():
+    last_result = "None"
+    while True:
+        print("\n")
+        print("########### Operation list ###########")
+        operations = []
+        operations.append({"ID":"1", "Description":DESCRIPTION_ADD, "NumOfInputs":2})
+        operations.append({"ID":"2", "Description":DESCRIPTION_SUBTRACT, "NumOfInputs":2})
+        operations.append({"ID":"3", "Description":DESCRIPTION_MULTIPLY, "NumOfInputs":2})
+        operations.append({"ID":"4", "Description":DESCRIPTION_DIVIDE, "NumOfInputs":2})
+        operations.append({"ID":"5", "Description":DESCRIPTION_EXPONENT, "NumOfInputs":2})
+        operations.append({"ID":"6", "Description":DESCRIPTION_SQUARE_ROOT, "NumOfInputs":1})
+        operations.append({"ID":"7", "Description":DESCRIPTION_LAST_RESULT, "NumOfInputs":0})
+        for elem in operations:
+            print(elem["ID"] + ". " + elem["Description"])
+        print("######################################")
+        ids = [operation['ID'] for operation in operations]
+        
+        
+        choice = input("Choose Operation (" + "/".join(ids) + ")  : ")
 
-    if choice in ('1', '2', '3', '4', '5', '6'):
-        num1 = float(input("Enter first number: "))
+        if choice in ids:
+            cindex = ids.index(choice)
+            descriptions = [operation['Description'] for operation in operations]    
+            num_inputs = [operation['NumOfInputs'] for operation in operations]
+            cdescription = descriptions[cindex]
+            cnum_input = num_inputs[cindex]
 
-        if choice != '6':
-            num2 = float(input("Enter second number: "))
+            print("<" + str(cdescription) + ">")
+            num1, num2 = get_input_num(cnum_input)
 
-        if choice == '1':
-            print("Result:", add(num1, num2))
-        elif choice == '2':
-            print("Result:", subtract(num1, num2))
-        elif choice == '3':
-            print("Result:", multiply(num1, num2))
-        elif choice == '4':
-            print("Result:", divide(num1, num2))
-        elif choice == '5':
-            print("Result:", exponent(num1, num2))
-        elif choice == '6':
-            print("Result:", square_root(num1))
-    else:
-        print("Invalid input")
+            if cdescription == DESCRIPTION_ADD:
+                result = add(num1, num2)
+            elif cdescription == DESCRIPTION_SUBTRACT:
+                result = subtract(num1, num2)
+            elif cdescription == DESCRIPTION_MULTIPLY:
+                result = multiply(num1, num2)
+            elif cdescription == DESCRIPTION_DIVIDE:
+                result = divide(num1, num2)
+            elif cdescription == DESCRIPTION_EXPONENT:
+                result = exponent(num1, num2)
+            elif cdescription == DESCRIPTION_SQUARE_ROOT:
+                result = square_root(num1)
+            elif cdescription == DESCRIPTION_LAST_RESULT:
+                result = last_result
+            else:
+                result = "None"
+            print("Result : ", str(result))
+            last_result = result
+        else:
+            print("Invalid input")
 
-
+main()
