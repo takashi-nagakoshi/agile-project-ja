@@ -4,14 +4,50 @@ import inspect
 DO_UNIT_TEST = True
 
 INPUT_ERROR             = "<Input Error> "
-DESCRIPTION_ADD         = "Add"
-DESCRIPTION_SUBTRACT    = "Subtract"
-DESCRIPTION_MULTIPLY    = "Multiply"
-DESCRIPTION_DIVIDE      = "Divide"
-DESCRIPTION_EXPONENT    = "Exponent"
-DESCRIPTION_SQUARE_ROOT = "Square Root"
+DESCRIPTION_ADD         = "Add         : x1 + x2"
+DESCRIPTION_SUBTRACT    = "Subtract    : x1 - x2"
+DESCRIPTION_MULTIPLY    = "Multiply    : x1 - x2"
+DESCRIPTION_DIVIDE      = "Divide      : x1 / x2"
+DESCRIPTION_EXPONENT    = "Exponent    : x1^x2"
+DESCRIPTION_SQUARE_ROOT = "Square Root : sqrt(x1)"
 DESCRIPTION_LAST_RESULT = "Show the last result value"
 
+# [add]__________________________________________________________________________________________________________
+def add(num1, num2):
+    return
+
+def test_add():
+    return
+
+# [subtract]_____________________________________________________________________________________________________
+def subtract(num1, num2):
+    return
+
+def test_subtract():
+    return
+
+# [multiply]_____________________________________________________________________________________________________
+def multiply(num1, num2):
+    return
+
+def test_multiply():
+    return
+
+# [divide]_______________________________________________________________________________________________________
+def divide(num1, num2):
+    return
+
+def test_divide():
+    return
+
+# [exponent]_____________________________________________________________________________________________________
+def exponent(num1, num2):
+    return
+
+def test_exponent():
+    return
+
+# [square root]__________________________________________________________________________________________________
 
 def square_root(num):
     if num >= 0:
@@ -44,72 +80,91 @@ def test_square_root():
     
     return
 
-def unit_test_aggregation():
-    test_square_root()
-    return
+# [main関数と付属関数]______________________________________________________________________________________________
 
-if DO_UNIT_TEST:
-    unit_test_aggregation()
+def main(last_result):
+    # 「Operation」の一覧を表示し，また「Operation」のdictionaryを作成する．
+    print("\n########### Operation list ###########")
+    operations = []
+    operations.append({"ID":"1", "Description":DESCRIPTION_ADD, "NumOfInputs":2})
+    operations.append({"ID":"2", "Description":DESCRIPTION_SUBTRACT, "NumOfInputs":2})
+    operations.append({"ID":"3", "Description":DESCRIPTION_MULTIPLY, "NumOfInputs":2})
+    operations.append({"ID":"4", "Description":DESCRIPTION_DIVIDE, "NumOfInputs":2})
+    operations.append({"ID":"5", "Description":DESCRIPTION_EXPONENT, "NumOfInputs":2})
+    operations.append({"ID":"6", "Description":DESCRIPTION_SQUARE_ROOT, "NumOfInputs":1})
+    operations.append({"ID":"7", "Description":DESCRIPTION_LAST_RESULT, "NumOfInputs":0})
+    for elem in operations:
+        print(elem["ID"] + ". " + elem["Description"])
+    print("######################################")
+    ids = [operation['ID'] for operation in operations]
+    
+    # ユーザーに「Operation」を選択してもらう．
+    choice = input("Choose Operation (" + "/".join(ids) + ")  : ")
+
+    # 選択された「Operation」に応じた処理を行う．
+    if choice in ids:
+        # 前処理
+        cindex = ids.index(choice)
+        descriptions = [operation['Description'] for operation in operations]    
+        num_inputs = [operation['NumOfInputs'] for operation in operations]
+        cdescription = descriptions[cindex]
+        cnum_input = num_inputs[cindex]
+
+        # Mode表示と同時にユーザに数値を入力してもらう．
+        print("<" + str(cdescription) + ">")
+        num1, num2 = get_input_num(cnum_input)
+
+        # 選択された「Operation」に応じた関数をcallする．
+        if cdescription == DESCRIPTION_ADD:
+            result = add(num1, num2)
+        elif cdescription == DESCRIPTION_SUBTRACT:
+            result = subtract(num1, num2)
+        elif cdescription == DESCRIPTION_MULTIPLY:
+            result = multiply(num1, num2)
+        elif cdescription == DESCRIPTION_DIVIDE:
+            result = divide(num1, num2)
+        elif cdescription == DESCRIPTION_EXPONENT:
+            result = exponent(num1, num2)
+        elif cdescription == DESCRIPTION_SQUARE_ROOT:
+            result = square_root(num1)
+        elif cdescription == DESCRIPTION_LAST_RESULT:
+            result = last_result
+        else:
+            result = "None"
+        print("Result : ", str(result))
+    else:
+        print("Invalid input")
+        result = last_result
+    return result
 
 def get_input_num(num_of_required_input):
-    num1 = 0 
-    num2 = 0
+    num1 = "None" # 0で初期化してもいいが，うっかり初期値のまま計算が継続しないようstrで初期化しておく．
+    num2 = "None"
     if num_of_required_input >= 1:
         num1 = float(input("Enter first number : "))
         if num_of_required_input >= 2:
             num2 = float(input("Enter second number  : "))
     return num1, num2
 
-def main():
-    last_result = "None"
-    while True:
-        print("\n")
-        print("########### Operation list ###########")
-        operations = []
-        operations.append({"ID":"1", "Description":DESCRIPTION_ADD, "NumOfInputs":2})
-        operations.append({"ID":"2", "Description":DESCRIPTION_SUBTRACT, "NumOfInputs":2})
-        operations.append({"ID":"3", "Description":DESCRIPTION_MULTIPLY, "NumOfInputs":2})
-        operations.append({"ID":"4", "Description":DESCRIPTION_DIVIDE, "NumOfInputs":2})
-        operations.append({"ID":"5", "Description":DESCRIPTION_EXPONENT, "NumOfInputs":2})
-        operations.append({"ID":"6", "Description":DESCRIPTION_SQUARE_ROOT, "NumOfInputs":1})
-        operations.append({"ID":"7", "Description":DESCRIPTION_LAST_RESULT, "NumOfInputs":0})
-        for elem in operations:
-            print(elem["ID"] + ". " + elem["Description"])
-        print("######################################")
-        ids = [operation['ID'] for operation in operations]
-        
-        
-        choice = input("Choose Operation (" + "/".join(ids) + ")  : ")
+# [Unit test関数を集約してcallする]________________________________________________________________________________
 
-        if choice in ids:
-            cindex = ids.index(choice)
-            descriptions = [operation['Description'] for operation in operations]    
-            num_inputs = [operation['NumOfInputs'] for operation in operations]
-            cdescription = descriptions[cindex]
-            cnum_input = num_inputs[cindex]
+def unit_test_aggregation():
+    test_add()
+    test_subtract()
+    test_multiply()
+    test_divide()
+    test_exponent()
+    test_square_root()
+    return
 
-            print("<" + str(cdescription) + ">")
-            num1, num2 = get_input_num(cnum_input)
+# [関数実行]______________________________________________________________________________________________________
 
-            if cdescription == DESCRIPTION_ADD:
-                result = add(num1, num2)
-            elif cdescription == DESCRIPTION_SUBTRACT:
-                result = subtract(num1, num2)
-            elif cdescription == DESCRIPTION_MULTIPLY:
-                result = multiply(num1, num2)
-            elif cdescription == DESCRIPTION_DIVIDE:
-                result = divide(num1, num2)
-            elif cdescription == DESCRIPTION_EXPONENT:
-                result = exponent(num1, num2)
-            elif cdescription == DESCRIPTION_SQUARE_ROOT:
-                result = square_root(num1)
-            elif cdescription == DESCRIPTION_LAST_RESULT:
-                result = last_result
-            else:
-                result = "None"
-            print("Result : ", str(result))
-            last_result = result
-        else:
-            print("Invalid input")
+if DO_UNIT_TEST:
+    unit_test_aggregation()
 
-main()
+last_result = "None"
+while True:
+    # unit_testが書きやすいよう，while文の中の処理は独立関数とする．
+    result = main(last_result) 
+    last_result = result
+
