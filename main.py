@@ -110,7 +110,7 @@ def main(last_result):
 
         # Mode表示と同時にユーザに数値を入力してもらう．
         print("<" + str(cdescription) + ">")
-        num1, num2 = get_input_num(cnum_input)
+        num1, num2 = get_input_num(cnum_input, last_result)
 
         # 選択された「Operation」に応じた関数をcallする．
         if cdescription == DESCRIPTION_ADD:
@@ -135,14 +135,36 @@ def main(last_result):
         result = last_result
     return result
 
-def get_input_num(num_of_required_input):
+def get_input_num(num_of_required_input, last_result):
     num1 = "None" # 0で初期化してもいいが，うっかり初期値のまま計算が継続しないようstrで初期化しておく．
     num2 = "None"
+    msg_of_last = "last"
+
     if num_of_required_input >= 1:
-        num1 = float(input("Enter first number : "))
-        if num_of_required_input >= 2:
-            num2 = float(input("Enter second number  : "))
+        num1 = request_user_to_specify_num("x1", msg_of_last, last_result)
+    if num_of_required_input >= 2:
+        num2 = request_user_to_specify_num("x2", msg_of_last, last_result)
     return num1, num2
+
+def request_user_to_specify_num(name_of_value, msg_of_last, last_result):
+    while True:
+        num = input("Enter " + name_of_value + " value (type '" + msg_of_last + "' to use the last result) \n: ")
+        if num == msg_of_last: 
+            return last_result
+            
+        else:
+            convert_success, result = convert_to_float(num)
+            if convert_success:
+                return result
+            else:
+                print("Invalid input. Please input again")
+
+def convert_to_float(num):
+    try:
+        result = float(num)
+        return True, result
+    except ValueError:
+        return False, "None"
 
 # [Unit test関数を集約してcallする]________________________________________________________________________________
 
