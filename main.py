@@ -39,12 +39,15 @@ def test_multiply():
 
 # [divide]_______________________________________________________________________________________________________
 def divide(num1, num2):
-    return num1 / num2
+    if num2 != 0:
+         return num1 / num2
+    else:
+         return "Error: Division by zero is not allowed."
 
 def test_divide():
     assert divide(10, 2) == 5
     assert divide(-10, 2) == -5
-    assert divide(0, 0) == 0
+    assert divide(10, 0) == "Error: Division by zero is not allowed."
 
 
 # [exponent]_____________________________________________________________________________________________________
