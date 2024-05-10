@@ -39,17 +39,25 @@ def test_multiply():
 
 # [divide]_______________________________________________________________________________________________________
 def divide(num1, num2):
-    return
+    if num2 != 0:
+         return num1 / num2
+    else:
+         return "Error: Division by zero is not allowed."
 
 def test_divide():
-    return
+    assert divide(10, 2) == 5
+    assert divide(-10, 2) == -5
+    assert divide(10, 0) == "Error: Division by zero is not allowed."
+
 
 # [exponent]_____________________________________________________________________________________________________
 def exponent(num1, num2):
-    return
+    return num1 ** num2
 
 def test_exponent():
-    return
+    assert exponent(2, 3) == 8
+    assert exponent(-2, 3) == -8
+    assert exponent(2, 0) == 1
 
 # [square root]__________________________________________________________________________________________________
 
